@@ -1,0 +1,53 @@
+{
+  "manifestVersion": 1,
+  "id": "docker-security",
+  "name": "Docker Security",
+  "public": false,
+  "version": "0.1.0",
+  "publisher": "ms",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services.Cloud"
+    }
+  ],
+  "description": "A task to scan for vulnerabilities in Docker files.",
+  "galleryFlags": ["Preview"],
+  "categories": ["Azure Pipelines"],
+  "icons": {
+    "default": "images/logo.png"
+  },
+  "content": {
+    "details": {
+      "path": "details.md"
+    }
+  },
+  "files": [
+    {
+      "path": "docker-security"
+    },
+    {
+      "path": "docker-security-pipeline-decorator.yml",
+      "addressable": true,
+      "contentType": "text/plain"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "docker-security",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"],
+      "properties": {
+        "name": "docker-security"
+      }
+    },
+    {
+      "id": "docker-security-required-task",
+      "type": "ms.azure-pipelines.pipeline-decorator",
+      "targets": ["ms.azure-pipelines-agent-job.post-checkout-tasks"],
+      "properties": {
+        "template": "docker-security-pipeline-decorator.yml"
+      },
+      "constraints": []
+    }
+  ]
+}
